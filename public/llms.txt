@@ -1,0 +1,11 @@
+# Base de connaissances
+
+> Réponses factuelles courtes et sourcées, organisées par catégorie. Chaque page répond à une question précise avec des données chiffrées et des variantes associées.
+
+## Catégories
+
+- [Tech / IA / Dev](/tech-ia/) : définitions, comparatifs d'outils, glossaire technique
+- [Finance / Crypto](/finance-crypto/) : définitions, conversions, comparatifs de plateformes
+- [Droit & démarches](/droit-demarches/) : délais légaux, définitions, procédures pas-à-pas
+
+Mise à jour régulière. Toutes les pages incluent une date de dernière modification et des sources vérifiables.
