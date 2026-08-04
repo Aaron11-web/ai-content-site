@@ -1,0 +1,472 @@
+{
+  "categories": [
+    {
+      "slug": "tech-ia",
+      "name": "Tech / IA / Dev",
+      "description": "Définitions, comparatifs d'outils et glossaire technique."
+    },
+    {
+      "slug": "finance-crypto",
+      "name": "Finance / Crypto",
+      "description": "Définitions, conversions et comparatifs de plateformes."
+    },
+    {
+      "slug": "droit-demarches",
+      "name": "Droit & démarches administratives",
+      "description": "Délais légaux, définitions et procédures pas-à-pas."
+    },
+    {
+      "slug": "science-culture",
+      "name": "Science & culture générale",
+      "description": "Faits vérifiés, phénomènes expliqués, chiffres sourcés."
+    },
+    {
+      "slug": "pratique-lifestyle",
+      "name": "Pratique & Lifestyle",
+      "description": "Conversions, astuces de cuisine et de quotidien."
+    }
+  ],
+  "pages": [
+    {
+      "category": "tech-ia",
+      "slug": "difference-llm-slm",
+      "question": "Quelle est la différence entre un LLM et un SLM ?",
+      "directAnswer": "Un LLM (Large Language Model) est entraîné sur des milliards de paramètres pour des tâches générales, tandis qu'un SLM (Small Language Model) utilise beaucoup moins de paramètres, ce qui le rend plus rapide et moins coûteux mais limité à des tâches plus ciblées.",
+      "context": "Les LLM comme GPT-4 ou Claude comptent souvent plusieurs centaines de milliards de paramètres et nécessitent des infrastructures GPU importantes. Les SLM, avec quelques milliards de paramètres, peuvent tourner localement sur un appareil, au prix d'une capacité de raisonnement réduite.",
+      "dataPoints": [
+        "Un LLM type dépasse 100 milliards de paramètres, un SLM se situe généralement entre 1 et 10 milliards.",
+        "Un SLM peut répondre 5 à 10 fois plus vite qu'un LLM sur du matériel équivalent.",
+        "Le coût d'inférence d'un SLM est en général 10 à 50 fois inférieur à celui d'un LLM."
+      ],
+      "variants": [
+        { "q": "Un SLM peut-il remplacer un LLM ?", "a": "Pour des tâches ciblées et répétitives (classification, extraction), oui. Pour du raisonnement complexe ou multi-étapes, un LLM reste plus fiable." },
+        { "q": "Quels sont des exemples de SLM ?", "a": "Phi-3 de Microsoft, Gemma de Google et Llama 3 8B sont des exemples courants de SLM open source." },
+        { "q": "Un SLM peut-il tourner sans connexion internet ?", "a": "Oui, c'est un de ses principaux avantages : il peut être exécuté localement sur un ordinateur ou un smartphone récent." }
+      ],
+      "sources": [
+        { "label": "Documentation Hugging Face sur les petits modèles", "url": "https://huggingface.co/blog" }
+      ],
+      "related": ["comparatif-gptbot-claudebot", "quest-ce-que-le-fine-tuning"]
+    },
+    {
+      "category": "tech-ia",
+      "slug": "comparatif-gptbot-claudebot",
+      "question": "Quelle est la différence entre GPTBot et ClaudeBot ?",
+      "directAnswer": "GPTBot est le crawler web d'OpenAI utilisé pour collecter des données d'entraînement et alimenter certaines fonctions de recherche de ChatGPT, tandis que ClaudeBot est l'équivalent d'Anthropic, utilisé pour l'entraînement et l'accès en temps réel aux pages citées par Claude.",
+      "context": "Les deux robots respectent le protocole robots.txt et s'identifient via leur user-agent (GPTBot, ClaudeBot). Un nombre croissant de sites choisissent de les bloquer, de les autoriser sélectivement, ou de les monétiser via des systèmes de paiement à la requête.",
+      "dataPoints": [
+        "GPTBot s'identifie avec le user-agent 'GPTBot' et respecte les règles définies dans robots.txt.",
+        "ClaudeBot s'identifie avec le user-agent 'ClaudeBot' et peut aussi apparaître sous 'anthropic-ai'.",
+        "Plusieurs grands éditeurs ont commencé à bloquer ou monétiser ces crawlers depuis 2025."
+      ],
+      "variants": [
+        { "q": "Comment bloquer GPTBot dans robots.txt ?", "a": "En ajoutant une règle 'User-agent: GPTBot' suivie de 'Disallow: /' dans le fichier robots.txt à la racine du site." },
+        { "q": "ClaudeBot respecte-t-il robots.txt ?", "a": "Oui, Anthropic documente publiquement le comportement de ClaudeBot et son respect des règles robots.txt." }
+      ],
+      "sources": [
+        { "label": "Documentation Anthropic sur les crawlers", "url": "https://docs.claude.com" }
+      ],
+      "related": ["difference-llm-slm"]
+    },
+    {
+      "category": "finance-crypto",
+      "slug": "quest-ce-quun-stablecoin",
+      "question": "Qu'est-ce qu'un stablecoin ?",
+      "directAnswer": "Un stablecoin est une cryptomonnaie dont la valeur est indexée sur un actif stable, le plus souvent le dollar américain, afin de limiter la volatilité typique des autres cryptomonnaies comme le bitcoin.",
+      "context": "Les stablecoins les plus utilisés (USDC, USDT) sont adossés à des réserves de dollars ou d'actifs équivalents, gérées par l'émetteur. Ils sont couramment utilisés pour les paiements automatisés entre machines, notamment dans les systèmes de micro-paiement web.",
+      "dataPoints": [
+        "L'USDC de Circle affiche une capitalisation de plus de 73 milliards de dollars.",
+        "Les stablecoins sont utilisés comme moyen de règlement pour les micro-paiements automatisés entre serveurs et robots."
+      ],
+      "variants": [
+        { "q": "Un stablecoin peut-il perdre sa valeur ?", "a": "Oui, en théorie, si les réserves qui le soutiennent perdent de leur valeur ou si la confiance dans l'émetteur s'effondre." },
+        { "q": "Quelle blockchain héberge les stablecoins ?", "a": "Les plus courantes sont Ethereum, Base et Solana, selon l'émetteur et le cas d'usage." }
+      ],
+      "sources": [
+        { "label": "Circle - documentation USDC", "url": "https://www.circle.com" }
+      ],
+      "related": []
+    },
+    {
+      "category": "droit-demarches",
+      "slug": "delai-legal-remboursement-achat-en-ligne",
+      "question": "Quel est le délai légal pour se faire rembourser un achat en ligne en France ?",
+      "directAnswer": "En France, le droit de rétractation légal pour un achat en ligne est de 14 jours à compter de la réception du produit, et le remboursement doit intervenir dans les 14 jours suivant la notification de rétractation.",
+      "context": "Ce délai s'applique aux achats effectués à distance auprès de professionnels, conformément au Code de la consommation. Certains produits (sur-mesure, périssables, numériques téléchargés) sont exclus de ce droit.",
+      "dataPoints": [
+        "Délai de rétractation : 14 jours calendaires à compter de la réception.",
+        "Délai de remboursement après notification : 14 jours maximum."
+      ],
+      "variants": [
+        { "q": "Le droit de rétractation s'applique-t-il aux achats en magasin ?", "a": "Non, il ne concerne que les achats à distance (en ligne, téléphone, courrier)." },
+        { "q": "Qui paie les frais de retour ?", "a": "Sauf mention contraire du vendeur, les frais de retour sont à la charge de l'acheteur." }
+      ],
+      "sources": [
+        { "label": "Code de la consommation - Service-Public.fr", "url": "https://www.service-public.fr" }
+      ],
+      "related": []
+    },
+    {
+      "category": "tech-ia",
+      "slug": "quest-ce-que-le-fine-tuning",
+      "question": "Qu'est-ce que le fine-tuning d'un modèle IA ?",
+      "directAnswer": "Le fine-tuning consiste à ré-entraîner un modèle déjà pré-entraîné sur un jeu de données plus restreint et spécialisé, afin de l'adapter à une tâche ou un domaine précis sans repartir de zéro.",
+      "context": "Contrairement à un entraînement complet qui nécessite des milliards d'exemples et des semaines de calcul, le fine-tuning part d'un modèle de base déjà compétent et ajuste ses poids sur quelques milliers à quelques millions d'exemples ciblés. Cela permet de spécialiser un modèle généraliste pour un usage précis (support client, code d'une entreprise, ton éditorial) à moindre coût.",
+      "dataPoints": [
+        "Le fine-tuning nécessite généralement beaucoup moins de données que l'entraînement initial d'un LLM.",
+        "Il existe des variantes plus légères comme le LoRA (Low-Rank Adaptation), qui n'ajustent qu'une fraction des paramètres du modèle."
+      ],
+      "variants": [
+        { "q": "Le fine-tuning change-t-il les connaissances générales du modèle ?", "a": "Non, il ajuste surtout le comportement et le style de réponse ; les connaissances générales viennent principalement de l'entraînement initial." },
+        { "q": "Fine-tuning ou RAG, lequel choisir ?", "a": "Le fine-tuning est adapté pour changer le style ou le comportement du modèle, le RAG est préférable pour lui donner accès à des informations à jour ou spécifiques sans le ré-entraîner." },
+        { "q": "Le fine-tuning est-il accessible aux particuliers ?", "a": "Oui, plusieurs fournisseurs proposent des interfaces de fine-tuning en libre-service sur des modèles open source ou via API." }
+      ],
+      "sources": [
+        { "label": "Documentation Hugging Face sur le fine-tuning", "url": "https://huggingface.co/docs" }
+      ],
+      "related": ["difference-llm-slm", "difference-rag-fine-tuning"]
+    },
+    {
+      "category": "tech-ia",
+      "slug": "quest-ce-quun-agent-ia",
+      "question": "Qu'est-ce qu'un agent IA (AI agent) ?",
+      "directAnswer": "Un agent IA est un système basé sur un modèle de langage capable d'exécuter des actions de façon autonome (rechercher, appeler des outils, naviguer sur le web, écrire du code) pour accomplir un objectif, plutôt que de simplement répondre à une question.",
+      "context": "Un agent combine un LLM avec un accès à des outils externes (API, navigateur, base de données) et une boucle de raisonnement qui lui permet de décomposer une tâche en plusieurs étapes, d'observer les résultats de chaque action, puis d'ajuster sa stratégie.",
+      "dataPoints": [
+        "Les agents s'appuient souvent sur des protocoles standardisés comme le MCP (Model Context Protocol) pour se connecter à des outils externes.",
+        "Un agent peut enchaîner plusieurs appels d'outils avant de produire une réponse finale, contrairement à un chatbot classique qui répond en une seule fois."
+      ],
+      "variants": [
+        { "q": "Un agent IA peut-il agir sans supervision humaine ?", "a": "Techniquement oui pour certaines tâches, mais la plupart des implémentations actuelles prévoient une validation humaine pour les actions sensibles (paiements, envois d'emails)." },
+        { "q": "Quelle est la différence entre un chatbot et un agent ?", "a": "Un chatbot répond à des questions en un tour de conversation ; un agent peut planifier et exécuter plusieurs actions successives pour atteindre un objectif." }
+      ],
+      "sources": [],
+      "related": ["comparatif-gptbot-claudebot"]
+    },
+    {
+      "category": "tech-ia",
+      "slug": "difference-rag-fine-tuning",
+      "question": "Quelle est la différence entre RAG et fine-tuning ?",
+      "directAnswer": "Le RAG (Retrieval-Augmented Generation) donne à un modèle un accès en temps réel à des documents externes au moment de la requête, tandis que le fine-tuning modifie durablement les paramètres internes du modèle via un ré-entraînement.",
+      "context": "Le RAG fonctionne en récupérant les passages les plus pertinents d'une base documentaire puis en les insérant dans le contexte fourni au modèle avant qu'il ne génère sa réponse. Le modèle lui-même reste inchangé. Le fine-tuning, à l'inverse, ajuste les poids internes du modèle de façon permanente.",
+      "dataPoints": [
+        "Le RAG permet de mettre à jour les connaissances d'un système sans ré-entraîner le modèle, simplement en actualisant la base documentaire.",
+        "Le fine-tuning est en général plus coûteux et plus lent à mettre à jour que le RAG."
+      ],
+      "variants": [
+        { "q": "Peut-on combiner RAG et fine-tuning ?", "a": "Oui, les deux approches sont complémentaires : le fine-tuning pour le style et le comportement, le RAG pour les connaissances à jour." }
+      ],
+      "sources": [],
+      "related": ["quest-ce-que-le-fine-tuning"]
+    },
+    {
+      "category": "finance-crypto",
+      "slug": "quest-ce-que-le-protocole-x402",
+      "question": "Qu'est-ce que le protocole x402 ?",
+      "directAnswer": "x402 est un protocole ouvert, initié par Coinbase, qui permet à un logiciel (notamment un agent IA) de payer automatiquement l'accès à une ressource web en utilisant le code HTTP 402 « Payment Required », réglé en stablecoin.",
+      "context": "Historiquement, le code 402 existait dans la norme HTTP mais n'était jamais utilisé en pratique. x402 le réactive pour permettre des micro-paiements machine-à-machine instantanés, sans création de compte ni carte bancaire : le client présente une preuve de paiement en stablecoin directement dans l'en-tête de la requête.",
+      "dataPoints": [
+        "La gouvernance du protocole x402 est passée à la Linux Foundation en avril 2026.",
+        "Parmi les membres fondateurs figurent Coinbase, Anthropic, Google, Visa, Mastercard, Stripe, AWS et Cloudflare."
+      ],
+      "variants": [
+        { "q": "x402 fonctionne-t-il avec des cartes bancaires classiques ?", "a": "Non, le règlement se fait en stablecoin (crypto-actif indexé sur une monnaie stable comme le dollar), pas par carte bancaire." },
+        { "q": "x402 est-il réservé aux grandes entreprises ?", "a": "Non, c'est un protocole ouvert que n'importe quel développeur peut implémenter côté serveur ou côté client." }
+      ],
+      "sources": [],
+      "related": ["quest-ce-quun-stablecoin", "comment-fonctionne-un-wallet-non-custodial"]
+    },
+    {
+      "category": "finance-crypto",
+      "slug": "comment-fonctionne-un-wallet-non-custodial",
+      "question": "Comment fonctionne un wallet crypto non-custodial ?",
+      "directAnswer": "Un wallet non-custodial est un portefeuille crypto dont l'utilisateur détient seul les clés privées, sans dépendre d'un intermédiaire (exchange, banque) pour accéder à ses fonds ou valider une transaction.",
+      "context": "Contrairement à un wallet custodial (où une plateforme comme un exchange garde les clés privées à la place de l'utilisateur), un wallet non-custodial place l'entière responsabilité de la sécurité sur l'utilisateur : la perte de la phrase de récupération (seed phrase) entraîne une perte irréversible des fonds.",
+      "dataPoints": [
+        "La sécurité d'un wallet non-custodial repose entièrement sur la conservation privée de la seed phrase, généralement composée de 12 ou 24 mots."
+      ],
+      "variants": [
+        { "q": "Un wallet non-custodial peut-il être piraté à distance ?", "a": "Les fonds ne peuvent pas être déplacés sans la clé privée, mais l'appareil ou l'utilisateur peuvent être ciblés par du phishing ou des malwares pour tenter de l'obtenir." },
+        { "q": "Quelle différence avec un compte sur un exchange ?", "a": "Sur un exchange, la plateforme détient les clés privées à votre place ; en cas de faillite ou de piratage de la plateforme, vos fonds peuvent être bloqués ou perdus." }
+      ],
+      "sources": [],
+      "related": ["quest-ce-que-le-protocole-x402"]
+    },
+    {
+      "category": "finance-crypto",
+      "slug": "difference-usdc-usdt",
+      "question": "Quelle est la différence entre USDC et USDT ?",
+      "directAnswer": "USDC (émis par Circle) et USDT (émis par Tether) sont tous deux des stablecoins indexés sur le dollar, mais ils diffèrent principalement par leur émetteur, leur niveau de transparence sur les réserves et leur cadre réglementaire.",
+      "context": "USDC publie des attestations régulières de ses réserves par des cabinets d'audit tiers et est davantage orienté vers la conformité réglementaire américaine. USDT, plus ancien et plus utilisé en volume mondial, a historiquement communiqué de façon moins détaillée sur la composition exacte de ses réserves, bien que cela ait évolué ces dernières années.",
+      "dataPoints": [
+        "USDC et USDT sont tous deux ancrés au dollar américain avec un objectif de parité 1:1.",
+        "USDT reste généralement le stablecoin avec le plus grand volume d'échange quotidien au niveau mondial."
+      ],
+      "variants": [
+        { "q": "Un stablecoin peut-il perdre sa parité avec le dollar ?", "a": "Oui, temporairement, en cas de crise de confiance ou de tension sur les réserves, avant un retour généralement rapide à la parité si l'émetteur est solvable." }
+      ],
+      "sources": [],
+      "related": ["quest-ce-quun-stablecoin"]
+    },
+    {
+      "category": "finance-crypto",
+      "slug": "quest-ce-quune-blockchain-layer-2",
+      "question": "Qu'est-ce qu'une blockchain Layer 2 ?",
+      "directAnswer": "Une blockchain Layer 2 est un réseau construit au-dessus d'une blockchain principale (Layer 1, comme Ethereum) pour traiter les transactions plus rapidement et à moindre coût, tout en s'appuyant sur la sécurité du réseau principal.",
+      "context": "Les Layer 2 regroupent (agrègent) de nombreuses transactions hors de la chaîne principale avant d'en publier une version condensée sur celle-ci, ce qui réduit fortement les frais et augmente la vitesse par rapport à une transaction traitée directement sur le Layer 1.",
+      "dataPoints": [
+        "Base (créé par Coinbase) et Solana font partie des réseaux couramment utilisés pour les paiements en stablecoin à faible coût.",
+        "Les frais de transaction sur un Layer 2 sont généralement une fraction de ceux du Layer 1 correspondant."
+      ],
+      "variants": [
+        { "q": "Un Layer 2 est-il aussi sécurisé que le Layer 1 ?", "a": "Il hérite en grande partie de la sécurité du Layer 1 sous-jacent, mais le niveau exact dépend de l'architecture technique choisie par chaque réseau." }
+      ],
+      "sources": [],
+      "related": ["quest-ce-que-le-protocole-x402"]
+    },
+    {
+      "category": "droit-demarches",
+      "slug": "delai-preavis-resiliation-abonnement-france",
+      "question": "Quel est le délai de préavis pour résilier un abonnement en France ?",
+      "directAnswer": "Il n'existe pas de délai de préavis légal unique pour tous les abonnements en France : il dépend du type de contrat (téléphonie, assurance, streaming) et des conditions générales, mais depuis 2023 la loi impose que la résiliation en ligne soit aussi simple que la souscription.",
+      "context": "Certains secteurs ont des règles spécifiques : en assurance, la loi Hamon permet de résilier à tout moment après un an de contrat, sans frais ni justification. Pour la téléphonie et l'accès à internet, un préavis (souvent de 10 jours) peut s'appliquer une fois la période d'engagement dépassée. Pour les abonnements sans engagement (streaming, presse), la résiliation est en général possible à tout moment, effective à la fin de la période déjà payée.",
+      "dataPoints": [
+        "Depuis le 1er juin 2023, la loi impose un bouton de résiliation directement accessible sur le site pour les contrats souscrits en ligne (résiliation « en 3 clics »).",
+        "La loi Hamon (2014) permet la résiliation sans frais des contrats d'assurance après la première année."
+      ],
+      "variants": [
+        { "q": "Peut-on résilier un abonnement par simple email ?", "a": "Cela dépend du contrat : depuis 2023, les services souscrits en ligne doivent proposer un moyen de résiliation en ligne au moins aussi simple que la souscription." },
+        { "q": "La résiliation prend-elle effet immédiatement ?", "a": "Pas toujours : sauf clause contraire, elle peut être effective à la fin de la période déjà facturée plutôt qu'immédiatement." }
+      ],
+      "sources": [
+        { "label": "Service-Public.fr - résiliation de contrats", "url": "https://www.service-public.fr" }
+      ],
+      "related": ["delai-legal-remboursement-achat-en-ligne"]
+    },
+    {
+      "category": "droit-demarches",
+      "slug": "quest-ce-que-le-rgpd",
+      "question": "Qu'est-ce que le RGPD et à qui s'applique-t-il ?",
+      "directAnswer": "Le RGPD (Règlement Général sur la Protection des Données) est une réglementation européenne entrée en application le 25 mai 2018, qui encadre la collecte et le traitement des données personnelles des résidents de l'Union européenne, y compris par des entreprises situées hors de l'UE si elles traitent ces données.",
+      "context": "Le RGPD impose notamment le consentement explicite pour la collecte de données, un droit d'accès et de suppression des données personnelles, et une notification obligatoire en cas de fuite de données. Les entreprises qui ne s'y conforment pas s'exposent à des sanctions financières pouvant atteindre un pourcentage significatif de leur chiffre d'affaires mondial.",
+      "dataPoints": [
+        "Le RGPD est entré en application le 25 mai 2018 dans l'ensemble de l'Union européenne.",
+        "Les sanctions peuvent atteindre jusqu'à 4% du chiffre d'affaires annuel mondial de l'entreprise, ou 20 millions d'euros, selon le montant le plus élevé."
+      ],
+      "variants": [
+        { "q": "Une entreprise américaine doit-elle respecter le RGPD ?", "a": "Oui, dès lors qu'elle traite les données personnelles de résidents européens, quel que soit le lieu où elle est établie." },
+        { "q": "Le RGPD s'applique-t-il aux particuliers ?", "a": "Non, il encadre le traitement de données par des organisations (entreprises, associations, administrations), pas les usages strictement personnels et privés." }
+      ],
+      "sources": [
+        { "label": "CNIL - présentation du RGPD", "url": "https://www.cnil.fr" }
+      ],
+      "related": []
+    },
+    {
+      "category": "droit-demarches",
+      "slug": "declarer-perte-piece-identite-france",
+      "question": "Comment déclarer la perte d'une pièce d'identité en France ?",
+      "directAnswer": "En cas de perte (et non de vol) d'une pièce d'identité en France, la déclaration peut se faire en ligne sur service-public.fr ou directement en mairie, avant d'entamer une demande de renouvellement.",
+      "context": "La déclaration de perte diffère de la déclaration de vol : cette dernière doit être effectuée en commissariat de police ou en gendarmerie, car elle implique un dépôt de plainte. Une fois la déclaration de perte enregistrée, elle est nécessaire pour constituer le dossier de refabrication du document auprès de la mairie.",
+      "dataPoints": [
+        "La déclaration de perte est un service en ligne gratuit disponible sur service-public.fr.",
+        "La déclaration de vol nécessite en revanche un déplacement en commissariat ou en gendarmerie."
+      ],
+      "variants": [
+        { "q": "La déclaration de perte est-elle payante ?", "a": "Non, la déclaration en elle-même est gratuite ; en revanche, le renouvellement d'une pièce d'identité perdue peut être soumis à un timbre fiscal, contrairement à un renouvellement pour expiration." },
+        { "q": "Faut-il porter plainte en cas de perte simple ?", "a": "Non, le dépôt de plainte concerne uniquement le vol ; une simple déclaration suffit en cas de perte." }
+      ],
+      "sources": [
+        { "label": "Service-Public.fr - perte de papiers d'identité", "url": "https://www.service-public.fr" }
+      ],
+      "related": []
+    },
+    {
+      "category": "droit-demarches",
+      "slug": "delai-conservation-factures-entreprise",
+      "question": "Quel est le délai légal de conservation des factures pour une entreprise en France ?",
+      "directAnswer": "Une entreprise en France doit conserver ses factures clients et fournisseurs pendant au moins 10 ans au titre des obligations comptables, avec un minimum de 6 ans exigé par l'administration fiscale pour les documents justificatifs.",
+      "context": "Cette obligation découle à la fois du Code de commerce (documents comptables : 10 ans) et du Livre des procédures fiscales (droit de contrôle de l'administration : 6 ans minimum). En pratique, la plupart des entreprises alignent leur politique d'archivage sur la durée la plus longue, soit 10 ans, pour éviter tout risque en cas de contrôle.",
+      "dataPoints": [
+        "Durée de conservation des documents comptables : 10 ans (Code de commerce).",
+        "Durée minimale exigée par l'administration fiscale pour les pièces justificatives : 6 ans."
+      ],
+      "variants": [
+        { "q": "Les factures peuvent-elles être conservées uniquement au format numérique ?", "a": "Oui, sous réserve de respecter les conditions d'intégrité et de lisibilité fixées par l'administration fiscale sur toute la durée de conservation." }
+      ],
+      "sources": [
+        { "label": "Service-Public.fr - obligations comptables des entreprises", "url": "https://www.service-public.fr" }
+      ],
+      "related": ["quest-ce-que-le-rgpd"]
+    },
+    {
+      "category": "science-culture",
+      "slug": "pourquoi-le-ciel-est-bleu",
+      "question": "Pourquoi le ciel est-il bleu ?",
+      "directAnswer": "Le ciel apparaît bleu parce que l'atmosphère diffuse davantage les longueurs d'onde courtes de la lumière du soleil (le bleu) que les longueurs d'onde plus longues (le rouge), un phénomène appelé diffusion de Rayleigh.",
+      "image": { "src": "/images/science-culture/ciel-bleu.jpg", "alt": "Ciel bleu dégagé avec quelques nuages blancs vu depuis le sol", "credit": "Image à remplacer par une photo libre de droits (Wikimedia Commons ou banque sous licence)." },
+      "context": "La lumière blanche du soleil contient toutes les couleurs du spectre visible. En traversant l'atmosphère, elle rencontre les molécules d'air, qui diffusent beaucoup plus fortement les courtes longueurs d'onde (bleu, violet) que les longues (rouge, orange). L'œil humain étant plus sensible au bleu qu'au violet, c'est le bleu qui domine notre perception du ciel.",
+      "dataPoints": [
+        "La diffusion de Rayleigh est environ 4 fois plus forte pour la lumière bleue que pour la lumière rouge, à cause de la différence de longueur d'onde.",
+        "Au coucher du soleil, la lumière traverse une épaisseur d'atmosphère plus grande, ce qui diffuse aussi le bleu et laisse dominer les teintes rouge-orangé."
+      ],
+      "variants": [
+        { "q": "Pourquoi le ciel est-il rouge au coucher du soleil ?", "a": "La lumière traverse une plus grande épaisseur d'atmosphère, qui diffuse presque tout le bleu en chemin et laisse passer surtout les teintes rouge et orange." },
+        { "q": "Pourquoi le ciel n'est-il pas violet, alors que le violet est diffusé encore plus que le bleu ?", "a": "Le soleil émet moins de lumière violette que de bleue, et l'œil humain est aussi moins sensible au violet, donc le bleu domine notre perception." }
+      ],
+      "sources": [],
+      "related": []
+    },
+    {
+      "category": "science-culture",
+      "slug": "comment-fonctionne-la-photosynthese",
+      "question": "Comment fonctionne la photosynthèse ?",
+      "directAnswer": "La photosynthèse est le processus par lequel les plantes utilisent l'énergie de la lumière du soleil pour transformer le dioxyde de carbone et l'eau en glucose (leur source d'énergie) et en oxygène, rejeté dans l'atmosphère.",
+      "image": { "src": "/images/science-culture/photosynthese.jpg", "alt": "Feuille verte vue de près montrant les nervures et la structure de la surface", "credit": "Image à remplacer par une photo libre de droits (Wikimedia Commons ou banque sous licence)." },
+      "context": "Ce processus se déroule principalement dans les chloroplastes des cellules végétales, grâce à la chlorophylle, le pigment qui capte la lumière et donne leur couleur verte aux feuilles. La réaction combine le CO2 absorbé par les feuilles et l'eau absorbée par les racines pour produire du glucose et de l'oxygène.",
+      "dataPoints": [
+        "La photosynthèse est à l'origine de la quasi-totalité de l'oxygène présent dans l'atmosphère terrestre.",
+        "Elle se déroule en deux grandes phases : les réactions dépendantes de la lumière et le cycle de Calvin, indépendant de la lumière."
+      ],
+      "variants": [
+        { "q": "Les plantes respirent-elles aussi ?", "a": "Oui, en plus de la photosynthèse, les plantes réalisent une respiration cellulaire qui consomme de l'oxygène, en permanence, jour et nuit." },
+        { "q": "La photosynthèse s'arrête-t-elle la nuit ?", "a": "Oui, elle nécessite de la lumière et s'interrompt donc en l'absence de luminosité." }
+      ],
+      "sources": [],
+      "related": []
+    },
+    {
+      "category": "science-culture",
+      "slug": "quest-ce-que-la-relativite-restreinte",
+      "question": "Qu'est-ce que la théorie de la relativité restreinte ?",
+      "directAnswer": "Publiée par Albert Einstein en 1905, la relativité restreinte établit que les lois de la physique sont les mêmes pour tous les observateurs en mouvement uniforme, et que la vitesse de la lumière dans le vide est constante, quelle que soit la vitesse de la source ou de l'observateur.",
+      "context": "Cette théorie a des conséquences qui semblent contre-intuitives : le temps s'écoule différemment selon la vitesse d'un observateur (dilatation du temps), et les distances peuvent se contracter dans la direction du mouvement. Elle aboutit également à la célèbre équation E=mc², reliant masse et énergie.",
+      "dataPoints": [
+        "La vitesse de la lumière dans le vide est d'environ 299 792 kilomètres par seconde, une constante universelle selon la théorie.",
+        "La relativité restreinte a été confirmée expérimentalement à de nombreuses reprises, notamment via les horloges atomiques embarquées dans les satellites GPS."
+      ],
+      "variants": [
+        { "q": "Quelle est la différence avec la relativité générale ?", "a": "La relativité restreinte concerne les mouvements uniformes (vitesse constante), tandis que la relativité générale, publiée en 1915, intègre la gravitation et les mouvements accélérés." },
+        { "q": "Le GPS a-t-il vraiment besoin de la relativité pour fonctionner ?", "a": "Oui : sans correction relativiste, les horloges des satellites GPS se désynchroniseraient rapidement avec celles au sol, rendant la géolocalisation imprécise en quelques minutes." }
+      ],
+      "sources": [],
+      "related": []
+    },
+    {
+      "category": "science-culture",
+      "slug": "pourquoi-les-feuilles-changent-de-couleur-automne",
+      "question": "Pourquoi les feuilles changent-elles de couleur en automne ?",
+      "directAnswer": "En automne, les arbres réduisent la production de chlorophylle (le pigment vert) à cause de la baisse de luminosité et des températures, ce qui révèle d'autres pigments déjà présents dans la feuille, comme les caroténoïdes (jaune-orange) et parfois des anthocyanes (rouge).",
+      "image": { "src": "/images/science-culture/feuilles-automne.jpg", "alt": "Feuilles d'arbre aux couleurs orange, rouge et jaune en automne", "credit": "Image à remplacer par une photo libre de droits (Wikimedia Commons ou banque sous licence)." },
+      "context": "Pendant le printemps et l'été, la chlorophylle masque les autres pigments présents dans la feuille grâce à sa couleur verte dominante. Quand les jours raccourcissent, l'arbre cesse progressivement de produire de la chlorophylle pour préparer la chute des feuilles, laissant apparaître les couleurs jaune, orange, voire rouge selon les espèces.",
+      "dataPoints": [
+        "Les caroténoïdes (jaune-orange) sont présents dans la feuille toute l'année, mais masqués par le vert dominant de la chlorophylle.",
+        "Les anthocyanes (rouge-pourpre), à l'inverse, sont produites spécifiquement à l'automne chez certaines espèces, en réaction à la lumière et au froid."
+      ],
+      "variants": [
+        { "q": "Toutes les feuilles deviennent-elles rouges à l'automne ?", "a": "Non, la couleur finale dépend des pigments propres à chaque espèce d'arbre : certaines virent surtout au jaune, d'autres au rouge ou au brun." }
+      ],
+      "sources": [],
+      "related": []
+    },
+    {
+      "category": "science-culture",
+      "slug": "comment-fonctionne-la-vaccination",
+      "question": "Comment fonctionne la vaccination ?",
+      "directAnswer": "Un vaccin entraîne le système immunitaire à reconnaître un agent pathogène (virus ou bactérie) en lui présentant une version inoffensive ou un fragment de celui-ci, afin qu'il puisse réagir plus rapidement et efficacement lors d'une exposition réelle ultérieure.",
+      "context": "Après l'injection, le système immunitaire produit des anticorps spécifiques et conserve une « mémoire immunitaire » grâce à certains globules blancs. Si la personne rencontre ensuite le véritable agent pathogène, sa réponse immunitaire est plus rapide et plus forte, ce qui empêche ou limite fortement la maladie.",
+      "dataPoints": [
+        "Il existe plusieurs technologies vaccinales : vaccins vivants atténués, inactivés, à sous-unités protéiques, ou à ARN messager.",
+        "La mémoire immunitaire conférée par un vaccin peut durer de quelques mois à plusieurs décennies selon le type de vaccin et l'agent ciblé."
+      ],
+      "variants": [
+        { "q": "Un vaccin peut-il transmettre la maladie qu'il prévient ?", "a": "Les vaccins inactivés, à sous-unités ou à ARN messager ne le peuvent pas, car ils ne contiennent pas d'agent pathogène capable de se répliquer." },
+        { "q": "Pourquoi certains vaccins nécessitent-ils plusieurs doses ?", "a": "Plusieurs doses permettent de renforcer et de consolider la mémoire immunitaire, la première dose ne suffisant parfois pas à établir une protection durable." }
+      ],
+      "sources": [],
+      "related": []
+    },
+    {
+      "category": "pratique-lifestyle",
+      "slug": "convertir-grammes-en-tasses",
+      "question": "Comment convertir des grammes en tasses en cuisine ?",
+      "directAnswer": "La conversion grammes-tasses dépend de l'ingrédient, car la densité varie : par exemple, une tasse de farine pèse environ 120-130 g, tandis qu'une tasse de sucre en poudre pèse environ 200 g.",
+      "context": "Contrairement au millilitre qui mesure toujours le même volume, la « tasse » (cup) est une unité de volume dont l'équivalent en grammes change selon la densité de l'ingrédient. C'est pourquoi il n'existe pas une seule règle de conversion universelle : il faut se référer à une table par ingrédient.",
+      "dataPoints": [
+        "1 tasse (cup) standard américaine = environ 240 ml.",
+        "1 tasse de farine ≈ 120-130 g ; 1 tasse de sucre en poudre ≈ 200 g ; 1 tasse de beurre ≈ 227 g."
+      ],
+      "variants": [
+        { "q": "Une tasse à café équivaut-elle à une « cup » de recette américaine ?", "a": "Non, une tasse à café classique fait environ 100-150 ml, alors qu'une « cup » américaine standard équivaut à environ 240 ml." },
+        { "q": "Existe-t-il un outil plus précis qu'une tasse pour doser en cuisine ?", "a": "Oui, une balance de cuisine reste la méthode la plus précise, en particulier pour la pâtisserie où les proportions sont sensibles." }
+      ],
+      "sources": [],
+      "related": []
+    },
+    {
+      "category": "pratique-lifestyle",
+      "slug": "conserver-avocat-coupe",
+      "question": "Quelle est la meilleure façon de conserver un avocat coupé ?",
+      "directAnswer": "Pour limiter l'oxydation d'un avocat coupé, il faut le badigeonner de jus de citron, le recouvrir directement au contact avec un film alimentaire (pour limiter l'exposition à l'air) et le placer au réfrigérateur, idéalement en gardant le noyau.",
+      "context": "Le brunissement de l'avocat est causé par l'oxydation de ses composés au contact de l'oxygène de l'air. Le jus de citron ou de citron vert ralentit cette réaction grâce à son acidité, et limiter le contact avec l'air (film alimentaire au contact direct de la chair) réduit encore davantage l'oxydation.",
+      "dataPoints": [
+        "Un avocat coupé et correctement protégé se conserve généralement 1 à 2 jours au réfrigérateur avant de brunir significativement.",
+        "Garder le noyau dans la moitié restante n'empêche pas totalement l'oxydation mais protège légèrement la zone qu'il recouvre directement."
+      ],
+      "variants": [
+        { "q": "Peut-on congeler de l'avocat ?", "a": "Oui, en purée avec un peu de jus de citron, l'avocat se congèle bien pendant plusieurs mois, même si la texture change légèrement à la décongélation." }
+      ],
+      "sources": [],
+      "related": []
+    },
+    {
+      "category": "pratique-lifestyle",
+      "slug": "detartrer-bouilloire-naturellement",
+      "question": "Comment détartrer une bouilloire naturellement ?",
+      "directAnswer": "Pour détartrer une bouilloire naturellement, il suffit de faire bouillir un mélange à parts égales d'eau et de vinaigre blanc (ou une solution d'eau avec du jus de citron), de laisser agir 15-20 minutes, puis de rincer abondamment à l'eau claire.",
+      "context": "Le tartre est constitué principalement de calcaire, dont la dissolution est accélérée par l'acidité du vinaigre blanc ou du citron. Ce type de détartrage évite l'usage de produits chimiques agressifs, ce qui est particulièrement pertinent pour un objet en contact avec de l'eau destinée à la consommation.",
+      "dataPoints": [
+        "Un mélange à parts égales eau/vinaigre blanc est la méthode naturelle la plus couramment recommandée pour le détartrage domestique.",
+        "Après détartrage, il est recommandé de faire bouillir la bouilloire une à deux fois avec de l'eau claire pour éliminer tout résidu de goût."
+      ],
+      "variants": [
+        { "q": "À quelle fréquence faut-il détartrer une bouilloire ?", "a": "Cela dépend de la dureté de l'eau locale, mais un détartrage mensuel à trimestriel est courant dans les zones à eau calcaire." }
+      ],
+      "sources": [],
+      "related": []
+    },
+    {
+      "category": "pratique-lifestyle",
+      "slug": "difference-bicarbonate-levure-chimique",
+      "question": "Quelle est la différence entre bicarbonate de soude et levure chimique ?",
+      "directAnswer": "Le bicarbonate de soude nécessite un ingrédient acide (citron, yaourt, vinaigre) dans la recette pour agir comme agent levant, alors que la levure chimique (baking powder) contient déjà son propre acide intégré et agit donc seule au contact de l'humidité et de la chaleur.",
+      "context": "Les deux sont des agents levants qui produisent du dioxyde de carbone pour faire gonfler une pâte, mais leur mécanisme diffère : le bicarbonate seul, sans acidité dans la recette, laisse souvent un léger goût métallique et une action levante insuffisante. La levure chimique, elle, associe déjà bicarbonate et acide sec, ce qui la rend plus polyvalente.",
+      "dataPoints": [
+        "1 cuillère à café de levure chimique équivaut approximativement à 1/4 de cuillère à café de bicarbonate de soude combiné à un ingrédient acide.",
+        "Le bicarbonate de soude est environ 3 à 4 fois plus puissant que la levure chimique à quantité égale."
+      ],
+      "variants": [
+        { "q": "Peut-on remplacer la levure chimique par du bicarbonate dans une recette ?", "a": "Oui, à condition d'ajouter un ingrédient acide (citron, yaourt, babeurre) et d'ajuster la quantité, le bicarbonate étant plus puissant." }
+      ],
+      "sources": [],
+      "related": []
+    },
+    {
+      "category": "pratique-lifestyle",
+      "slug": "convertir-celsius-fahrenheit",
+      "question": "Comment convertir des degrés Celsius en Fahrenheit ?",
+      "directAnswer": "Pour convertir des degrés Celsius en Fahrenheit, la formule est : °F = (°C × 9/5) + 32. Par exemple, 20°C correspond à 68°F.",
+      "context": "L'échelle Celsius, utilisée dans la majorité des pays du monde, place le point de congélation de l'eau à 0° et son point d'ébullition à 100°. L'échelle Fahrenheit, encore utilisée aux États-Unis, place ces mêmes repères à 32° et 212°, ce qui explique la formule de conversion.",
+      "dataPoints": [
+        "0°C = 32°F (point de congélation de l'eau).",
+        "100°C = 212°F (point d'ébullition de l'eau au niveau de la mer)."
+      ],
+      "variants": [
+        { "q": "Comment convertir des Fahrenheit en Celsius ?", "a": "La formule inverse est : °C = (°F − 32) × 5/9." },
+        { "q": "Quel pays utilise encore l'échelle Fahrenheit ?", "a": "Les États-Unis sont le principal pays à utiliser couramment le Fahrenheit au quotidien, avec quelques autres territoires comme les Bahamas ou les îles Caïmans." }
+      ],
+      "sources": [],
+      "related": []
+    }
+  ]
+}

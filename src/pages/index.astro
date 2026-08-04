@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import data from '../data/categories.json';
+
+const { categories } = data;
+---
+
+<BaseLayout
+  title="Base de connaissances — réponses factuelles sourcées"
+  description="Réponses directes, sourcées et structurées aux questions les plus fréquentes en tech, finance, droit et plus."
+>
+  <span class="eyebrow">Base de connaissances</span>
+  <h1>Réponses claires à des questions précises</h1>
+  <p>Chaque page répond directement à une question, avec des données sourcées et des variantes associées.</p>
+
+  <div class="category-grid">
+    {categories.map((cat) => (
+      <a class="category-card" href={`/blog/${cat.slug}/`}>
+        <h3>{cat.name}</h3>
+        <p>{cat.description}</p>
+      </a>
+    ))}
+  </div>
+</BaseLayout>

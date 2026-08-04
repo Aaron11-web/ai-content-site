@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import data from '../../../data/categories.json';
+
+export function getStaticPaths() {
+  return data.categories.map((cat) => ({
+    params: { category: cat.slug },
+    props: { category: cat },
+  }));
+}
+
+const { category } = Astro.props;
+const pages = data.pages.filter((p) => p.category === category.slug);
+---
+
+<BaseLayout
+  title={`${category.name} — Base de connaissances`}
+  description={category.description}
+>
+  <span class="eyebrow">{category.name}</span>
+  <h1>{category.description}</h1>
+
+  <p><a href={`/blog/${category.slug}/guide-complet/`}><strong>📖 Lire le guide complet sur {category.name}</strong></a></p>
+
+  <ul class="question-list">
+    {pages.map((p) => (
+      <li><a href={`/blog/${category.slug}/${p.slug}/`}>{p.question}</a></li>
+    ))}
+  </ul>
+</BaseLayout>

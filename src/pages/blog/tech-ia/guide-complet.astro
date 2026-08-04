@@ -1,0 +1,200 @@
+---
+import PillarLayout from '../../../layouts/PillarLayout.astro';
+
+const title = "Guide complet : comprendre les LLM, les agents IA et les crawlers en 2026";
+const description = "Un guide de référence sur le fonctionnement des grands modèles de langage, la différence entre fine-tuning et RAG, les agents IA autonomes, et le comportement réel des crawlers IA sur le web.";
+
+const toc = [
+  { id: "quest-ce-quun-llm", label: "Qu'est-ce qu'un LLM ?" },
+  { id: "llm-vs-slm", label: "LLM vs SLM : quelle différence ?" },
+  { id: "fine-tuning-vs-rag", label: "Fine-tuning vs RAG" },
+  { id: "agents-ia", label: "Les agents IA autonomes" },
+  { id: "crawlers-ia", label: "Comment les crawlers IA explorent le web" },
+  { id: "familles-modeles", label: "Les grandes familles de modèles" },
+  { id: "cas-usage", label: "Cas d'usage professionnels" },
+  { id: "benchmarks", label: "Comment mesure-t-on la performance" },
+  { id: "limites", label: "Limites actuelles des LLM" },
+  { id: "securite", label: "Sécurité et bonnes pratiques" },
+  { id: "tendances", label: "Tendances à surveiller" },
+  { id: "glossaire", label: "Glossaire rapide" },
+  { id: "faq", label: "Questions fréquentes" },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: title,
+  description,
+  articleSection: "Tech / IA",
+};
+---
+
+<PillarLayout title={title} description={description} eyebrow="Tech / IA — Guide complet" toc={toc} jsonLd={jsonLd}>
+
+  <h2 id="quest-ce-quun-llm">Qu'est-ce qu'un LLM ?</h2>
+  <p>Un LLM (Large Language Model, ou grand modèle de langage) est un système d'intelligence artificielle entraîné sur d'énormes quantités de texte pour prédire, mot après mot, la suite la plus probable d'une séquence. Cette capacité de prédiction, une fois affinée sur des milliards de phrases, permet au modèle de tenir une conversation, de résumer un document, de traduire un texte ou d'écrire du code, sans qu'aucune règle grammaticale ou logique n'ait été programmée explicitement.</p>
+  <p>Techniquement, la plupart des LLM actuels reposent sur une architecture appelée <strong>Transformer</strong>, introduite en 2017. Cette architecture permet au modèle de pondérer l'importance de chaque mot d'une phrase par rapport à tous les autres, plutôt que de les traiter un par un dans l'ordre strict — c'est ce mécanisme, appelé « attention », qui donne aux LLM leur capacité à saisir le contexte sur de longs passages de texte.</p>
+  <p>L'entraînement d'un LLM se déroule généralement en plusieurs phases : un pré-entraînement massif sur des corpus de texte généralistes (pages web, livres, code, articles scientifiques), suivi d'un affinage sur des exemples de conversations de qualité, puis souvent d'un ajustement par retour humain (RLHF, Reinforcement Learning from Human Feedback) pour rendre les réponses plus utiles, plus sûres et mieux alignées avec les attentes des utilisateurs.</p>
+  <div class="callout">
+    À retenir : un LLM ne « comprend » pas le monde comme un humain — il modélise des régularités statistiques dans le langage, à une échelle telle que le résultat produit une illusion de compréhension et de raisonnement.
+  </div>
+
+  <h2 id="llm-vs-slm">LLM vs SLM : quelle différence ?</h2>
+  <p>Face au coût croissant de l'exécution des très grands modèles, l'industrie a développé des <strong>SLM (Small Language Models)</strong> : des modèles beaucoup plus légers, comptant généralement entre 1 et 10 milliards de paramètres, contre plusieurs centaines de milliards pour un LLM de pointe.</p>
+  <table>
+    <tr><th>Critère</th><th>LLM</th><th>SLM</th></tr>
+    <tr><td>Taille (paramètres)</td><td>&gt; 100 milliards</td><td>1 à 10 milliards</td></tr>
+    <tr><td>Vitesse d'inférence</td><td>Plus lente</td><td>5 à 10x plus rapide</td></tr>
+    <tr><td>Coût d'exécution</td><td>Élevé</td><td>10 à 50x moins cher</td></tr>
+    <tr><td>Exécution locale (sur appareil)</td><td>Rare, matériel puissant requis</td><td>Possible sur smartphone ou PC récent</td></tr>
+    <tr><td>Capacité de raisonnement complexe</td><td>Généralement supérieure</td><td>Plus limitée</td></tr>
+  </table>
+  <p>Un SLM ne remplace pas un LLM pour des tâches ouvertes ou un raisonnement en plusieurs étapes, mais il devient très pertinent pour des tâches répétitives et bien définies : classification d'emails, extraction d'informations structurées, modération de contenu, ou assistants embarqués fonctionnant sans connexion internet. Des exemples connus incluent Phi-3 (Microsoft), Gemma (Google) ou Llama 3 8B (Meta).</p>
+
+  <h2 id="fine-tuning-vs-rag">Fine-tuning vs RAG : deux façons de spécialiser un modèle</h2>
+  <p>Une fois un LLM entraîné, deux grandes approches permettent de l'adapter à un usage précis, et elles sont souvent confondues alors qu'elles répondent à des besoins différents.</p>
+  <h3>Le fine-tuning</h3>
+  <p>Le fine-tuning consiste à poursuivre l'entraînement d'un modèle déjà pré-entraîné sur un jeu de données plus restreint et spécialisé. Cela modifie durablement les poids internes du modèle : après un fine-tuning réussi, le modèle a « appris » un style, un ton ou un comportement particulier de façon permanente, sans avoir besoin qu'on le lui rappelle à chaque requête. Des techniques plus légères comme le LoRA (Low-Rank Adaptation) permettent de faire cela en n'ajustant qu'une fraction des paramètres, réduisant fortement le coût de calcul.</p>
+  <h3>Le RAG (Retrieval-Augmented Generation)</h3>
+  <p>Le RAG, à l'inverse, ne touche pas aux poids du modèle. Il fonctionne en récupérant, au moment même de la requête, les passages de documents les plus pertinents dans une base externe, puis en les insérant dans le contexte fourni au modèle avant qu'il ne génère sa réponse. Le modèle reste inchangé ; c'est l'information qui lui est fournie qui varie.</p>
+  <table>
+    <tr><th>Critère</th><th>Fine-tuning</th><th>RAG</th></tr>
+    <tr><td>Ce qui change</td><td>Les poids du modèle</td><td>Le contexte fourni à la requête</td></tr>
+    <tr><td>Mise à jour des connaissances</td><td>Nécessite un nouveau ré-entraînement</td><td>Il suffit de mettre à jour la base documentaire</td></tr>
+    <tr><td>Coût de mise en œuvre</td><td>Plus élevé</td><td>Plus faible</td></tr>
+    <tr><td>Cas d'usage typique</td><td>Adapter le style, le ton, le comportement</td><td>Donner accès à des données récentes ou spécifiques</td></tr>
+  </table>
+  <p>Dans la pratique, les deux approches sont souvent combinées : un fine-tuning pour ajuster le comportement général du modèle, et un système RAG par-dessus pour lui donner accès à des connaissances à jour sans avoir à le ré-entraîner à chaque changement.</p>
+
+  <h2 id="agents-ia">Les agents IA autonomes</h2>
+  <p>Un agent IA est un système qui combine un LLM avec un accès à des outils externes — API, navigateur web, base de données, interpréteur de code — et une boucle de raisonnement qui lui permet de décomposer une tâche complexe en plusieurs étapes successives. Contrairement à un chatbot classique, qui répond en un seul tour de conversation, un agent peut observer le résultat de chaque action qu'il entreprend, puis ajuster sa stratégie avant de continuer.</p>
+  <p>Cette architecture s'est standardisée autour de protocoles ouverts comme le <strong>MCP (Model Context Protocol)</strong>, qui permet à un agent de se connecter de façon uniforme à des outils tiers (calendrier, messagerie, bases de données d'entreprise, connecteurs de paiement) sans que chaque intégration ne doive être développée sur mesure.</p>
+  <p>Les agents IA modernes commencent aussi à intégrer des capacités de paiement autonome, via des protocoles comme x402 (voir notre guide sur les paiements entre IA), ce qui leur permet d'acheter de l'information ou d'accéder à des ressources payantes sans intervention humaine directe à chaque transaction — sous réserve d'une autorisation et d'un budget définis à l'avance par l'utilisateur.</p>
+
+  <h2 id="crawlers-ia">Comment les crawlers IA explorent le web</h2>
+  <p>Au-delà des agents temps réel, les grandes entreprises d'IA font tourner des <strong>crawlers</strong> — des robots qui parcourent le web en continu pour collecter du contenu, que ce soit pour entraîner de futurs modèles ou pour alimenter des fonctions de recherche en temps réel. Chaque entreprise fait généralement tourner deux types de bots distincts : un bot d'entraînement (par exemple GPTBot pour OpenAI, ClaudeBot pour Anthropic) et un bot de recherche déclenché par une requête utilisateur (ChatGPT-User, Claude-User, Perplexity-User).</p>
+  <p>Des études menées en 2026 sur des logs de sites en production ont permis d'observer des comportements assez distincts d'un bot à l'autre :</p>
+  <ul>
+    <li><strong>GPTBot</strong> est le plus actif, avec une médiane d'environ 4 200 requêtes par jour sur les sites suivis. Il explore en largeur (breadth-first), priorise les chemins <code>/blog/</code>, <code>/docs/</code> et <code>/about/</code>, et revisite les pages populaires environ tous les 2,4 jours.</li>
+    <li><strong>ClaudeBot</strong> se distingue par une attention forte portée aux images, qui représentent environ 35% de ses requêtes — un comportement atypique par rapport aux autres crawlers.</li>
+    <li><strong>PerplexityBot</strong> et <strong>Google-Extended</strong> affichent des volumes plus modérés, avec un comportement de crawl plus ciblé.</li>
+    <li>Aucun de ces bots n'exécute de JavaScript : ils ne voient que le HTML tel qu'il est servi au premier chargement, ce qui rend les sites générés en statique (comme celui-ci) beaucoup plus visibles pour eux qu'un site fortement dépendant du rendu côté client.</li>
+  </ul>
+  <p>Le ratio entre le volume de pages crawlées et le trafic effectivement renvoyé vers le site source est très déséquilibré : certaines études rapportent des ratios de plusieurs milliers de pages crawlées pour un seul clic de retour généré. C'est précisément ce déséquilibre qui a motivé l'apparition de mécanismes de facturation des crawlers, comme le Pay Per Crawl de Cloudflare.</p>
+
+  <h2 id="familles-modeles">Les grandes familles de modèles en 2026</h2>
+  <p>Le paysage des LLM se répartit globalement en deux grandes catégories : les <strong>modèles propriétaires</strong>, accessibles uniquement via une API payante (comme les familles GPT, Claude ou Gemini), et les <strong>modèles open source ou open weight</strong>, dont les poids peuvent être téléchargés et exécutés par n'importe qui disposant du matériel suffisant (comme les familles Llama ou Mistral).</p>
+  <p>Cette distinction a des implications concrètes au-delà du simple prix d'accès :</p>
+  <ul>
+    <li><strong>Contrôle et confidentialité</strong> : un modèle open source peut être hébergé en interne, ce qui évite d'envoyer des données sensibles à un tiers via une API.</li>
+    <li><strong>Rythme de mise à jour</strong> : les modèles propriétaires sont généralement mis à jour en continu côté fournisseur, sans action nécessaire de l'utilisateur, alors qu'un modèle open source doit être explicitement remplacé par une nouvelle version pour bénéficier des améliorations.</li>
+    <li><strong>Coût à l'échelle</strong> : au-delà d'un certain volume d'usage, héberger soi-même un modèle open source peut devenir plus économique qu'une facturation à l'appel API, au prix d'une charge d'infrastructure à gérer en interne.</li>
+    <li><strong>Personnalisation</strong> : le fine-tuning complet (modification de tous les poids, par opposition au LoRA) n'est généralement possible que sur un modèle dont on peut héberger et modifier librement les poids.</li>
+  </ul>
+  <p>Le choix entre les deux dépend donc moins d'une hiérarchie de qualité brute — les meilleurs modèles propriétaires et open source ont vu leurs performances converger sur de nombreuses tâches — que des contraintes opérationnelles propres à chaque usage : confidentialité des données, volume de requêtes, besoin de personnalisation profonde, ou simplicité de mise en œuvre.</p>
+
+  <h2 id="cas-usage">Cas d'usage professionnels courants</h2>
+  <p>Au-delà de l'usage grand public sous forme de chatbot, les LLM et les agents IA sont aujourd'hui intégrés dans un nombre croissant de flux de travail professionnels :</p>
+  <h3>Support client</h3>
+  <p>Les agents IA couplés à un système RAG interrogeant la documentation produit et l'historique des tickets permettent de traiter automatiquement une part importante des demandes de premier niveau, avec une bascule vers un humain pour les cas complexes ou sensibles.</p>
+  <h3>Développement logiciel</h3>
+  <p>La génération et la relecture de code assistées par LLM font désormais partie du quotidien de nombreuses équipes techniques, que ce soit via des extensions d'éditeur ou des agents capables d'explorer une base de code entière, d'exécuter des tests et de proposer des corrections.</p>
+  <h3>Recherche et synthèse documentaire</h3>
+  <p>Les capacités de résumé et de recherche augmentée par RAG permettent de synthétiser rapidement de gros volumes de documents (rapports, contrats, publications scientifiques), en citant les passages sources pour permettre une vérification humaine.</p>
+  <h3>Automatisation de tâches répétitives</h3>
+  <p>Les agents capables d'appeler des outils externes via des protocoles comme le MCP peuvent enchaîner des actions concrètes — remplir un formulaire, mettre à jour une base de données, envoyer une notification — à partir d'une instruction en langage naturel, réduisant le besoin de scripts dédiés pour chaque petite automatisation.</p>
+
+  <h2 id="benchmarks">Comment mesure-t-on la performance d'un modèle ?</h2>
+  <p>Face à la multiplication des modèles disponibles, la communauté s'appuie sur des <strong>benchmarks</strong> — des batteries de tests standardisés — pour comparer objectivement leurs performances. Chaque benchmark cible une capacité précise, et aucun ne donne à lui seul une image complète de la qualité d'un modèle.</p>
+  <ul>
+    <li><strong>Benchmarks de connaissances générales</strong> : évaluent la capacité du modèle à répondre correctement à des questions factuelles couvrant de nombreux domaines (sciences, histoire, droit, médecine).</li>
+    <li><strong>Benchmarks de raisonnement mathématique</strong> : mesurent la capacité à résoudre des problèmes nécessitant plusieurs étapes logiques ou calculatoires.</li>
+    <li><strong>Benchmarks de code</strong> : évaluent la capacité à générer du code fonctionnel, à corriger des bugs, ou à faire passer des suites de tests automatisées.</li>
+    <li><strong>Benchmarks conversationnels</strong> : reposent souvent sur des comparaisons en aveugle où des évaluateurs humains préfèrent une réponse à une autre, sans savoir quel modèle l'a générée.</li>
+  </ul>
+  <p>Ces benchmarks présentent toutefois des limites connues : un modèle peut être surentraîné sur des données proches de celles du test (une forme de « fuite » de données), ce qui gonfle artificiellement son score sans refléter une amélioration réelle de ses capacités générales. C'est pourquoi les benchmarks doivent toujours être interprétés avec prudence, en les croisant avec des retours d'usage réels sur des tâches concrètes.</p>
+
+  <h2 id="limites">Limites actuelles des LLM</h2>
+  <p>Malgré des progrès rapides, les LLM conservent des limites structurelles importantes qu'il est utile de connaître avant de leur confier une tâche critique.</p>
+  <h3>Les hallucinations</h3>
+  <p>Un modèle peut générer une réponse formulée avec une grande assurance, mais factuellement incorrecte — que ce soit une statistique inventée, une citation erronée, ou une référence qui n'existe pas. Ce phénomène, appelé hallucination, découle directement du mode de fonctionnement du modèle : il prédit la suite la plus <em>probable</em> d'un texte, pas nécessairement la plus <em>vraie</em>. Le RAG (voir plus haut) permet de réduire ce risque en ancrant les réponses sur des documents vérifiables, sans toutefois l'éliminer complètement.</p>
+  <h3>Les biais hérités des données d'entraînement</h3>
+  <p>Un LLM apprend à partir d'un corpus massif de texte produit par des humains, avec toutes les imperfections, biais culturels et déséquilibres de représentation que cela implique. Le modèle peut donc reproduire, voire amplifier, certains biais présents dans ses données d'entraînement, ce qui nécessite un travail spécifique d'atténuation lors des phases d'ajustement.</p>
+  <h3>Le coût de calcul et l'empreinte énergétique</h3>
+  <p>L'entraînement d'un grand modèle de langage nécessite des infrastructures de calcul considérables, avec une consommation énergétique et une empreinte carbone associées non négligeables. L'inférence (l'utilisation quotidienne du modèle une fois entraîné) représente elle aussi, à grande échelle, une consommation énergétique cumulée significative — un facteur qui pousse une partie de la recherche vers des modèles plus petits et plus efficaces, comme les SLM évoqués plus haut.</p>
+  <h3>La fenêtre de contexte limitée</h3>
+  <p>Même les modèles les plus récents ne peuvent traiter qu'une quantité finie de texte en une seule fois. Au-delà de cette limite, appelée fenêtre de contexte, le modèle « oublie » les informations les plus anciennes de la conversation ou du document fourni, ce qui peut poser problème pour l'analyse de très longs documents sans recourir à des techniques de découpage ou de RAG.</p>
+
+  <h2 id="securite">Bonnes pratiques de sécurité et d'usage en entreprise</h2>
+  <p>L'intégration de LLM et d'agents IA dans des flux professionnels soulève des questions de sécurité spécifiques, distinctes de celles d'un logiciel traditionnel.</p>
+  <ul>
+    <li><strong>Injection de prompt</strong> : un contenu malveillant inséré dans un document ou une page web consultée par un agent peut tenter de détourner son comportement (par exemple, lui faire exécuter une action non prévue). Les systèmes bien conçus limitent les permissions accordées à un agent et exigent une validation humaine pour les actions sensibles.</li>
+    <li><strong>Fuite de données confidentielles</strong> : envoyer des informations sensibles à un modèle via une API tierce implique de faire confiance à la politique de traitement des données du fournisseur ; pour des données très sensibles, l'hébergement d'un modèle en interne peut être préférable.</li>
+    <li><strong>Vérification humaine des sorties critiques</strong> : compte tenu du risque d'hallucination, toute sortie d'un LLM utilisée dans un contexte à enjeu (juridique, médical, financier) devrait être relue par un humain compétent avant d'être exploitée telle quelle.</li>
+    <li><strong>Traçabilité des actions d'un agent</strong> : conserver un historique détaillé des actions effectuées par un agent autonome permet d'auditer son comportement a posteriori en cas d'anomalie.</li>
+  </ul>
+
+  <h2 id="tendances">Tendances à surveiller</h2>
+  <p>Le domaine évolue vite, et plusieurs directions structurent les développements récents observés en 2026 :</p>
+  <ul>
+    <li><strong>Généralisation des agents avec accès à des outils</strong> : de plus en plus de produits grand public intègrent des capacités d'agent (navigation, exécution de code, appels d'API) plutôt qu'un simple chat texte.</li>
+    <li><strong>Standardisation des protocoles d'interopérabilité</strong> : des protocoles ouverts comme le MCP pour la connexion aux outils, ou x402 pour les paiements automatisés, réduisent la fragmentation entre fournisseurs.</li>
+    <li><strong>Montée des modèles multimodaux</strong> : la capacité à traiter conjointement texte, image, audio et parfois vidéo devient un standard plutôt qu'une fonctionnalité annexe.</li>
+    <li><strong>Spécialisation via des modèles plus petits</strong> : à mesure que les SLM gagnent en capacité, davantage d'usages professionnels ciblés migrent vers des modèles plus légers, moins coûteux à faire tourner en continu.</li>
+  </ul>
+
+  <h2 id="glossaire">Glossaire rapide</h2>
+  <ul>
+    <li><strong>Token</strong> : unité de texte (mot ou fragment de mot) que le modèle traite et génère.</li>
+    <li><strong>Paramètre</strong> : valeur numérique interne ajustée pendant l'entraînement ; leur nombre est souvent utilisé comme indicateur (imparfait) de la taille d'un modèle.</li>
+    <li><strong>Inférence</strong> : le fait de faire tourner un modèle déjà entraîné pour produire une réponse, par opposition à l'entraînement.</li>
+    <li><strong>Contexte / fenêtre de contexte</strong> : la quantité de texte qu'un modèle peut prendre en compte simultanément pour produire sa réponse.</li>
+    <li><strong>Hallucination</strong> : une réponse générée avec assurance par le modèle mais factuellement incorrecte.</li>
+    <li><strong>Poids (weights)</strong> : les valeurs numériques internes d'un modèle, obtenues après entraînement ; les « télécharger » revient à obtenir une copie exécutable du modèle.</li>
+    <li><strong>Prompt</strong> : l'instruction ou la question fournie en entrée au modèle.</li>
+    <li><strong>RLHF</strong> : Reinforcement Learning from Human Feedback, une technique d'ajustement d'un modèle à partir de préférences exprimées par des évaluateurs humains.</li>
+    <li><strong>Multimodal</strong> : capacité d'un modèle à traiter plusieurs types de données en entrée ou en sortie (texte, image, audio) au-delà du seul texte.</li>
+  </ul>
+
+  <h2 id="faq">Questions fréquentes</h2>
+  <div class="faq-item">
+    <p class="q">Un SLM peut-il remplacer un LLM ?</p>
+    <p>Pour des tâches ciblées et répétitives, oui. Pour du raisonnement complexe ou multi-étapes, un LLM reste généralement plus fiable.</p>
+  </div>
+  <div class="faq-item">
+    <p class="q">Peut-on combiner fine-tuning et RAG ?</p>
+    <p>Oui, c'est même une pratique courante : le fine-tuning pour le style et le comportement, le RAG pour les connaissances à jour.</p>
+  </div>
+  <div class="faq-item">
+    <p class="q">Un agent IA peut-il agir totalement sans supervision humaine ?</p>
+    <p>Techniquement oui pour certaines tâches, mais la plupart des implémentations actuelles prévoient une validation humaine pour les actions sensibles, comme les paiements ou l'envoi de communications.</p>
+  </div>
+  <div class="faq-item">
+    <p class="q">Pourquoi les crawlers IA ne voient-ils pas le contenu généré en JavaScript ?</p>
+    <p>Parce qu'ils ne disposent pas d'un moteur de rendu de navigateur complet : ils récupèrent le code HTML brut renvoyé par le serveur, sans exécuter les scripts qui construiraient dynamiquement la page dans un navigateur classique.</p>
+  </div>
+  <div class="faq-item">
+    <p class="q">Un modèle open source est-il moins performant qu'un modèle propriétaire ?</p>
+    <p>Pas nécessairement : sur de nombreuses tâches, les meilleurs modèles open source récents obtiennent des résultats proches des modèles propriétaires équivalents ; l'écart dépend surtout de la tâche précise et de la taille du modèle comparé.</p>
+  </div>
+  <div class="faq-item">
+    <p class="q">Qu'est-ce que le Model Context Protocol (MCP) ?</p>
+    <p>C'est un protocole ouvert qui standardise la façon dont un agent IA se connecte à des outils et sources de données externes, évitant de devoir développer une intégration sur mesure pour chaque service.</p>
+  </div>
+
+  <div class="faq-item">
+    <p class="q">Qu'est-ce qu'un benchmark de modèle et faut-il s'y fier aveuglément ?</p>
+    <p>Un benchmark est une batterie de tests standardisés utilisée pour comparer les modèles sur une capacité précise (connaissances, code, raisonnement). Il faut l'interpréter avec prudence : un score élevé peut parfois résulter d'une proximité entre les données de test et les données d'entraînement, plutôt que d'une amélioration réelle et générale des capacités du modèle.</p>
+  </div>
+  <div class="faq-item">
+    <p class="q">Qu'est-ce que l'injection de prompt ?</p>
+    <p>C'est une technique par laquelle un contenu malveillant, inséré dans un document ou une page consultée par un agent IA, tente de détourner son comportement pour lui faire exécuter une action non prévue par l'utilisateur. C'est pourquoi les systèmes bien conçus limitent les permissions accordées à un agent et exigent une validation humaine pour les actions sensibles.</p>
+  </div>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://huggingface.co/blog" rel="noopener" target="_blank">Hugging Face — documentation et publications sur les modèles de langage</a></li>
+    <li><a href="https://docs.claude.com" rel="noopener" target="_blank">Documentation Anthropic sur les crawlers et le Model Context Protocol</a></li>
+  </ul>
+
+</PillarLayout>

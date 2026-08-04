@@ -1,0 +1,204 @@
+---
+import PillarLayout from '../../../layouts/PillarLayout.astro';
+
+const title = "Guide complet : stablecoins, wallets et paiements automatisés entre IA";
+const description = "Comment fonctionnent les stablecoins, la différence entre wallet custodial et non-custodial, les blockchains Layer 2, et le protocole x402 qui permet aux agents IA de payer automatiquement pour accéder à des ressources.";
+
+const toc = [
+  { id: "stablecoins", label: "Qu'est-ce qu'un stablecoin ?" },
+  { id: "usdc-vs-usdt", label: "USDC vs USDT" },
+  { id: "wallets", label: "Wallet custodial vs non-custodial" },
+  { id: "layer2", label: "Les blockchains Layer 2" },
+  { id: "x402", label: "Le protocole x402" },
+  { id: "ccp", label: "Comment un site facture un accès" },
+  { id: "fiscalite", label: "Fiscalité et cadre réglementaire" },
+  { id: "comparaison-modeles", label: "Comparer les modèles de monétisation" },
+  { id: "cas-usage", label: "Cas d'usage concrets" },
+  { id: "securiser-wallet-agent", label: "Sécuriser un wallet d'agent IA" },
+  { id: "ecosysteme", label: "L'écosystème des acteurs" },
+  { id: "risques", label: "Risques à connaître" },
+  { id: "faq", label: "Questions fréquentes" },
+  { id: "glossaire", label: "Glossaire rapide" },
+  { id: "tendances", label: "Tendances à surveiller" },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: title,
+  description,
+  articleSection: "Finance / Crypto",
+};
+---
+
+<PillarLayout title={title} description={description} eyebrow="Finance / Crypto — Guide complet" toc={toc} jsonLd={jsonLd}>
+
+  <h2 id="stablecoins">Qu'est-ce qu'un stablecoin ?</h2>
+  <p>Un stablecoin est une cryptomonnaie dont la valeur est indexée sur un actif stable, le plus souvent le dollar américain, afin d'éviter la forte volatilité qui caractérise des cryptomonnaies comme le bitcoin ou l'ether. L'objectif est simple : offrir les avantages techniques d'un actif numérique (transfert rapide, programmable, sans intermédiaire bancaire classique) sans le risque de voir sa valeur fluctuer de plusieurs pourcents en quelques heures.</p>
+  <p>Les stablecoins les plus utilisés, comme l'USDC (émis par Circle) ou l'USDT (émis par Tether), sont dits « adossés à des réserves » (collateralized) : pour chaque unité de stablecoin en circulation, l'émetteur détient en théorie l'équivalent en dollars, en bons du Trésor américain ou en actifs équivalents. C'est cette réserve qui garantit — en principe — que le stablecoin peut toujours être échangé contre un dollar.</p>
+  <p>Il existe aussi des stablecoins dits « algorithmiques », qui tentent de maintenir leur parité par des mécanismes automatisés plutôt que par des réserves physiques. Ce modèle s'est révélé nettement plus fragile : plusieurs stablecoins algorithmiques ont perdu leur parité de façon spectaculaire par le passé, ce qui a renforcé la préférence du marché pour les modèles adossés à des réserves réelles.</p>
+
+  <h2 id="usdc-vs-usdt">USDC vs USDT : quelles différences concrètes</h2>
+  <table>
+    <tr><th>Critère</th><th>USDC</th><th>USDT</th></tr>
+    <tr><td>Émetteur</td><td>Circle</td><td>Tether</td></tr>
+    <tr><td>Transparence des réserves</td><td>Attestations régulières par des auditeurs tiers</td><td>Historiquement moins détaillée, en amélioration ces dernières années</td></tr>
+    <tr><td>Positionnement</td><td>Orienté conformité réglementaire américaine</td><td>Plus ancien, volume d'échange mondial généralement supérieur</td></tr>
+    <tr><td>Usage privilégié</td><td>Paiements institutionnels, intégrations entreprise</td><td>Trading, volume d'échange global</td></tr>
+  </table>
+  <p>Dans les deux cas, il s'agit d'un pari sur la solvabilité et l'honnêteté de l'émetteur : la valeur du stablecoin ne repose pas sur un mécanisme décentralisé infalsifiable, mais sur la promesse (plus ou moins vérifiable) que les réserves existent réellement. C'est un point de vigilance à connaître avant d'utiliser massivement l'un ou l'autre pour des paiements professionnels.</p>
+
+  <h2 id="wallets">Wallet custodial vs non-custodial</h2>
+  <p>Un <strong>wallet</strong> (portefeuille numérique) est l'outil qui permet de détenir, envoyer et recevoir des cryptomonnaies. La distinction la plus importante à comprendre est celle entre wallet custodial et non-custodial.</p>
+  <h3>Wallet custodial</h3>
+  <p>Dans un wallet custodial, une plateforme tierce (un exchange comme Coinbase ou Binance, par exemple) détient les clés privées à la place de l'utilisateur. C'est similaire à un compte bancaire classique : l'utilisateur fait confiance à la plateforme pour sécuriser ses fonds et exécuter ses instructions. En cas de piratage ou de faillite de la plateforme, les fonds des utilisateurs peuvent être bloqués, voire perdus.</p>
+  <h3>Wallet non-custodial</h3>
+  <p>Dans un wallet non-custodial, l'utilisateur détient seul ses clés privées, généralement représentées sous la forme d'une phrase de récupération (seed phrase) de 12 ou 24 mots. Aucun intermédiaire ne peut bloquer ou geler les fonds, mais la responsabilité de la sécurité repose entièrement sur l'utilisateur : la perte de la seed phrase entraîne une perte définitive et irréversible des fonds, sans recours possible.</p>
+  <div class="callout">
+    Pour un usage professionnel ou automatisé (par exemple un agent IA qui paie pour accéder à du contenu), le choix du type de wallet a des implications directes sur la sécurité opérationnelle : un wallet non-custodial mal configuré peut exposer une clé privée à un logiciel tiers, avec un risque de perte de fonds sans intervention humaine possible pour l'annuler.
+  </div>
+
+  <h2 id="layer2">Les blockchains Layer 2</h2>
+  <p>Une blockchain « Layer 1 » (comme Ethereum) traite directement les transactions sur son réseau principal, ce qui garantit un haut niveau de sécurité mais limite la vitesse et fait grimper les frais en période de forte demande. Une blockchain <strong>Layer 2</strong> est construite au-dessus d'un Layer 1 : elle regroupe (agrège) un grand nombre de transactions hors de la chaîne principale, avant d'en publier une version condensée sur celle-ci, ce qui réduit fortement les frais et augmente la vitesse de traitement tout en héritant en grande partie de la sécurité du réseau sous-jacent.</p>
+  <p>Base (lancé par Coinbase) et Solana font partie des réseaux les plus utilisés aujourd'hui pour les paiements en stablecoin à faible coût, ce qui en fait des choix naturels pour des cas d'usage de micro-paiement, où des frais de transaction élevés rendraient l'opération non rentable.</p>
+
+  <h2 id="x402">Le protocole x402 : faire payer une IA automatiquement</h2>
+  <p>Le code HTTP 402 (« Payment Required ») existe dans la norme HTTP depuis ses débuts, mais n'avait jamais été réellement utilisé en pratique — jusqu'à l'apparition du protocole <strong>x402</strong>, initié par Coinbase. x402 réactive ce code pour permettre à un logiciel, et en particulier à un agent IA, de payer automatiquement l'accès à une ressource web (une page, une API, un jeu de données) en réglant en stablecoin, sans création de compte préalable ni carte bancaire.</p>
+  <p>Concrètement, quand un client (souvent un agent IA équipé d'un wallet) tente d'accéder à une ressource protégée, le serveur répond avec un code 402 accompagné du prix demandé. Le client peut alors joindre une preuve de paiement en stablecoin directement dans l'en-tête de sa requête suivante, et obtenir l'accès de façon quasi instantanée, sans intervention humaine à chaque transaction.</p>
+  <p>La gouvernance de ce protocole est passée à la Linux Foundation en avril 2026, un signe de sa maturation vers un standard ouvert plutôt qu'un outil propriétaire. Parmi les membres fondateurs figurent des acteurs aussi variés que Coinbase, Anthropic, Google, Visa, Mastercard, Stripe, AWS et Cloudflare — ce qui illustre l'ampleur de l'intérêt porté à ce type de paiement machine-à-machine à la fois par l'écosystème crypto et par les acteurs traditionnels du paiement.</p>
+
+  <h2 id="ccp">Comment un site peut concrètement facturer un accès (mécanique générale)</h2>
+  <p>Pour comprendre comment ces briques s'assemblent en pratique, voici le déroulé typique d'une requête facturée, que ce soit un crawler d'entreprise ou un agent temps réel :</p>
+  <ol>
+    <li>Le client (crawler ou agent) envoie une requête HTTP classique vers une page ou une API protégée.</li>
+    <li>Le serveur détecte que la ressource est payante et répond avec un code <strong>402 Payment Required</strong>, accompagné du prix demandé et des méthodes de paiement acceptées.</li>
+    <li>Le client, s'il dispose d'un wallet approvisionné et d'une autorisation de dépense suffisante, construit une preuve de paiement en stablecoin et la joint à une nouvelle requête.</li>
+    <li>Le serveur (ou un intermédiaire comme une passerelle de paiement) vérifie la validité de la transaction sur la blockchain concernée.</li>
+    <li>Une fois la vérification confirmée, le serveur renvoie la ressource demandée, généralement en quelques centaines de millisecondes.</li>
+  </ol>
+  <p>L'ensemble de ce cycle peut se dérouler sans aucune intervention humaine, ce qui est précisément l'intérêt de ce type de protocole pour des micro-paiements à très haute fréquence, où le coût et la lenteur d'un paiement par carte bancaire classique (avec ses étapes de validation manuelle) seraient totalement disproportionnés.</p>
+
+  <h2 id="fiscalite">Fiscalité et cadre réglementaire des paiements crypto</h2>
+  <p>Recevoir des paiements en stablecoin pour l'accès à un contenu ou un service soulève des questions fiscales et réglementaires qu'il convient d'anticiper, même si le cadre exact varie selon les juridictions et continue d'évoluer.</p>
+  <ul>
+    <li><strong>Traitement fiscal des revenus perçus en stablecoin</strong> : dans la plupart des juridictions, un revenu perçu en cryptomonnaie, y compris un stablecoin, reste imposable comme un revenu classique, converti à sa valeur en monnaie locale au moment de la réception.</li>
+    <li><strong>Obligations de déclaration</strong> : selon le pays et le volume traité, des obligations de déclaration spécifiques aux actifs numériques peuvent s'appliquer, en plus des obligations comptables classiques.</li>
+    <li><strong>Choix entre conservation en crypto ou conversion immédiate en monnaie fiduciaire</strong> : certaines plateformes de paiement crypto proposent une conversion automatique et immédiate en monnaie locale, ce qui simplifie la comptabilité mais fait perdre l'un des avantages du stablecoin (le règlement peer-to-peer sans intermédiaire bancaire).</li>
+  </ul>
+  <p>Compte tenu de la nouveauté et de l'évolution rapide de ce cadre réglementaire, il est recommandé de consulter un expert-comptable ou un conseiller fiscal familier des actifs numériques avant de mettre en place un système de facturation reposant sur des paiements crypto à grande échelle.</p>
+
+  <h2 id="comparaison-modeles">Comparer les modèles de monétisation disponibles pour un site</h2>
+  <p>Au-delà du paiement direct par les crawlers ou les agents IA, plusieurs modèles de monétisation coexistent aujourd'hui pour un site qui souhaite valoriser son contenu face à l'exploitation par des IA :</p>
+  <table>
+    <tr><th>Modèle</th><th>Principe</th><th>Maturité en 2026</th></tr>
+    <tr><td>Blocage pur</td><td>Interdire l'accès aux crawlers IA via robots.txt</td><td>Très mature, largement utilisé</td></tr>
+    <tr><td>Pay Per Crawl</td><td>Facturer chaque visite d'un crawler, réglée en fiat via une plateforme intermédiaire</td><td>Beta, adoption réelle encore incertaine côté grandes IA</td></tr>
+    <tr><td>Paiement par agent (x402)</td><td>Facturer un agent temps réel agissant pour un utilisateur, réglé en stablecoin</td><td>Émergent, standard en cours de consolidation</td></tr>
+    <tr><td>Licences de contenu négociées</td><td>Accords commerciaux directs entre un éditeur et une entreprise d'IA</td><td>Existant mais réservé aux gros éditeurs disposant d'un contenu à forte valeur</td></tr>
+  </table>
+  <p>Ces approches ne sont pas mutuellement exclusives : un site peut par exemple bloquer certains crawlers jugés peu fiables, tout en ouvrant un accès payant à d'autres via Pay Per Crawl, et en restant compatible avec le paiement par agent pour les requêtes en temps réel.</p>
+
+  <h2 id="cas-usage">Cas d'usage concrets</h2>
+  <ul>
+    <li><strong>Accès payant au contenu pour les crawlers IA</strong> : un site peut facturer les robots d'entraînement ou de recherche qui consultent ses pages, plutôt que de les bloquer purement et simplement.</li>
+    <li><strong>Agents shopping</strong> : un agent IA qui compare des prix et effectue un achat pour le compte d'un utilisateur peut régler la transaction directement, à partir d'un budget préalablement autorisé.</li>
+    <li><strong>Accès à des API et jeux de données</strong> : un agent de recherche peut payer à l'usage pour interroger une base de données spécialisée, sans abonnement mensuel fixe.</li>
+    <li><strong>Outils MCP payants</strong> : un outil exposé via le Model Context Protocol peut être facturé à l'appel plutôt que par un abonnement classique.</li>
+  </ul>
+
+  <h2 id="securiser-wallet-agent">Sécuriser un wallet utilisé par un agent IA</h2>
+  <p>Confier un wallet à un agent IA autonome — c'est-à-dire lui donner la capacité de dépenser des fonds sans validation humaine à chaque transaction — introduit une surface de risque spécifique, différente de celle d'un wallet utilisé manuellement par une personne. Plusieurs bonnes pratiques se sont dégagées avec la généralisation de ce type d'usage :</p>
+  <ul>
+    <li><strong>Wallet dédié et budget plafonné</strong> : plutôt que de donner à un agent l'accès à un wallet principal, il est recommandé de lui allouer un wallet séparé, approvisionné avec un montant limité et régulièrement renouvelé, afin de plafonner la perte maximale possible en cas de dysfonctionnement ou de compromission.</li>
+    <li><strong>Règles de dépense programmées</strong> : de nombreuses implémentations permettent de définir des règles explicites — montant maximal par transaction, liste de domaines ou de fournisseurs autorisés, plafond cumulé par jour — appliquées automatiquement avant toute transaction.</li>
+    <li><strong>Journalisation systématique</strong> : chaque paiement effectué par l'agent devrait être enregistré avec son contexte (requête à l'origine, ressource obtenue, montant), pour permettre un audit a posteriori en cas d'anomalie.</li>
+    <li><strong>Séparation entre clé de signature et logique de décision</strong> : dans les architectures les plus prudentes, la clé privée capable de signer une transaction est isolée dans un module distinct de la logique de raisonnement de l'agent, qui ne peut que <em>demander</em> un paiement plutôt que le signer lui-même directement.</li>
+  </ul>
+  <p>Ces précautions rejoignent des principes déjà connus en sécurité informatique classique (principe du moindre privilège, plafonnement des risques, traçabilité), simplement appliqués à un contexte nouveau où le « décideur » de la dépense n'est plus un humain mais un système automatisé.</p>
+
+  <h2 id="ecosysteme">L'écosystème des acteurs impliqués</h2>
+  <p>La mise en place d'un paiement automatisé entre une IA et un site web mobilise en réalité plusieurs catégories d'acteurs, dont les rôles se complètent :</p>
+  <table>
+    <tr><th>Acteur</th><th>Rôle</th></tr>
+    <tr><td>Émetteurs de stablecoins</td><td>Circle (USDC), Tether (USDT) — garantissent la parité avec le dollar via leurs réserves</td></tr>
+    <tr><td>Réseaux blockchain (Layer 1 et Layer 2)</td><td>Ethereum, Base, Solana — traitent et enregistrent les transactions</td></tr>
+    <tr><td>Fournisseurs d'infrastructure web</td><td>Cloudflare et équivalents — détectent les bots, appliquent le code 402, vérifient les paiements côté serveur</td></tr>
+    <tr><td>Acteurs du paiement traditionnel</td><td>Visa, Mastercard, Stripe — impliqués dans la gouvernance des protocoles pour faire le pont avec les rails de paiement classiques</td></tr>
+    <tr><td>Entreprises d'IA</td><td>OpenAI, Anthropic, Google, etc. — opèrent les crawlers et les agents qui, potentiellement, effectuent les paiements</td></tr>
+    <tr><td>Éditeurs de contenu</td><td>Les sites web eux-mêmes, qui choisissent de facturer ou non l'accès à leur contenu</td></tr>
+  </table>
+  <p>Cette diversité d'acteurs explique en partie pourquoi la standardisation autour de protocoles ouverts comme x402, gouvernés par une fondation neutre plutôt que par une seule entreprise, est perçue comme une condition nécessaire à l'adoption à grande échelle : aucun acteur ne souhaite dépendre d'une infrastructure propriétaire contrôlée par un concurrent direct.</p>
+
+  <h2 id="risques">Risques à connaître avant de se lancer</h2>
+  <p>Avant d'intégrer un système de paiement crypto automatisé, plusieurs points de vigilance méritent d'être soulignés honnêtement :</p>
+  <ul>
+    <li><strong>Volatilité de l'adoption</strong> : à ce jour, peu de grandes entreprises d'IA ont confirmé publiquement payer effectivement pour l'accès au contenu via ce type de mécanisme ; l'infrastructure existe, mais son usage réel reste encore limité.</li>
+    <li><strong>Irréversibilité</strong> : une transaction en stablecoin, une fois confirmée sur la blockchain, ne peut généralement pas être annulée, contrairement à un paiement par carte bancaire qui peut faire l'objet d'un rétrofacturation (chargeback).</li>
+    <li><strong>Sécurité du wallet</strong> : la perte ou le vol d'une clé privée associée à un wallet non-custodial entraîne une perte définitive de fonds, sans recours.</li>
+    <li><strong>Cadre réglementaire évolutif</strong> : la réglementation autour des stablecoins et des paiements crypto continue d'évoluer selon les pays, ce qui peut avoir un impact sur la disponibilité ou la légalité de certains usages selon la juridiction.</li>
+  </ul>
+
+  <h2 id="faq">Questions fréquentes</h2>
+  <div class="faq-item">
+    <p class="q">Un stablecoin peut-il perdre sa valeur ?</p>
+    <p>Oui, temporairement, en cas de crise de confiance ou de tension sur les réserves de l'émetteur, avant un retour généralement rapide à la parité si l'émetteur reste solvable. Les stablecoins algorithmiques (non adossés à des réserves réelles) sont historiquement plus fragiles sur ce point.</p>
+  </div>
+  <div class="faq-item">
+    <p class="q">x402 fonctionne-t-il avec une carte bancaire classique ?</p>
+    <p>Non, le règlement se fait exclusivement en stablecoin, pas par carte bancaire, même si des acteurs du paiement traditionnel comme Visa ou Mastercard participent à la gouvernance du protocole.</p>
+  </div>
+  <div class="faq-item">
+    <p class="q">Un wallet non-custodial peut-il être piraté à distance ?</p>
+    <p>Les fonds ne peuvent pas être déplacés sans la clé privée elle-même, mais l'appareil ou l'utilisateur peuvent être ciblés par du phishing ou des malwares cherchant à l'obtenir.</p>
+  </div>
+  <div class="faq-item">
+    <p class="q">Un Layer 2 est-il aussi sécurisé que le Layer 1 sous-jacent ?</p>
+    <p>Il en hérite en grande partie, mais le niveau exact de sécurité dépend de l'architecture technique spécifique choisie par chaque réseau Layer 2.</p>
+  </div>
+  <div class="faq-item">
+    <p class="q">x402 est-il réservé aux grandes entreprises ?</p>
+    <p>Non, c'est un protocole ouvert que n'importe quel développeur peut implémenter, aussi bien côté serveur (pour facturer l'accès à une ressource) que côté client (pour construire un agent capable de payer).</p>
+  </div>
+  <div class="faq-item">
+    <p class="q">Que se passe-t-il si un agent IA dépense accidentellement trop d'argent ?</p>
+    <p>C'est précisément pour limiter ce risque que les bonnes pratiques recommandent un wallet dédié à budget plafonné, avec des règles de dépense programmées (montant maximal par transaction, plafond journalier) appliquées automatiquement avant chaque paiement, plutôt que de donner un accès illimité à un wallet principal.</p>
+  </div>
+  <div class="faq-item">
+    <p class="q">Les revenus perçus en stablecoin sont-ils imposables ?</p>
+    <p>Dans la plupart des juridictions, oui : un revenu perçu en stablecoin reste en général traité comme un revenu classique par l'administration fiscale, converti à sa valeur en monnaie locale au moment de la réception. Il est recommandé de se renseigner auprès d'un expert-comptable pour les modalités précises applicables à sa situation.</p>
+  </div>
+  <div class="faq-item">
+    <p class="q">Faut-il bloquer ou monétiser les crawlers IA ?</p>
+    <p>Cela dépend de la stratégie du site : le blocage pur reste l'approche la plus mature et la plus simple à mettre en œuvre, tandis que la monétisation (Pay Per Crawl, paiement par agent) est encore émergente et son adoption réelle par les grandes entreprises d'IA reste à ce jour incertaine. Les deux approches peuvent aussi être combinées selon les bots concernés.</p>
+  </div>
+
+  <h2 id="glossaire">Glossaire rapide</h2>
+  <ul>
+    <li><strong>Stablecoin</strong> : cryptomonnaie dont la valeur est indexée sur un actif stable, généralement le dollar américain.</li>
+    <li><strong>Wallet</strong> : outil logiciel permettant de détenir, envoyer et recevoir des cryptomonnaies.</li>
+    <li><strong>Seed phrase</strong> : phrase de récupération (généralement 12 ou 24 mots) qui donne accès aux fonds d'un wallet non-custodial ; sa perte entraîne une perte définitive des fonds.</li>
+    <li><strong>Layer 1 / Layer 2</strong> : le Layer 1 est le réseau blockchain principal (ex. Ethereum) ; un Layer 2 est construit par-dessus pour accélérer les transactions et réduire les frais.</li>
+    <li><strong>x402</strong> : protocole ouvert réactivant le code HTTP 402 pour permettre des paiements automatisés en stablecoin.</li>
+    <li><strong>Pay Per Crawl</strong> : mécanisme, notamment proposé par Cloudflare, permettant de facturer les visites des crawlers IA sur un site.</li>
+    <li><strong>Custodial / non-custodial</strong> : qualifie si un tiers (custodial) ou l'utilisateur lui-même (non-custodial) détient les clés privées d'un wallet.</li>
+  </ul>
+
+  <h2 id="tendances">Tendances à surveiller</h2>
+  <p>Plusieurs évolutions méritent une attention particulière pour qui s'intéresse à ce domaine en 2026 :</p>
+  <ul>
+    <li><strong>Passage progressif du Pay Per Crawl vers un modèle « Pay Per Use »</strong>, où la facturation dépend davantage de la valeur réellement créée (par exemple une citation effective dans une réponse) que du simple volume de pages visitées.</li>
+    <li><strong>Consolidation de la gouvernance de x402</strong> sous une fondation neutre plutôt que sous le contrôle exclusif d'un seul acteur, ce qui favorise une adoption plus large par des acteurs concurrents entre eux.</li>
+    <li><strong>Multiplication des passerelles entre paiement crypto et rails traditionnels</strong>, portée notamment par l'implication d'acteurs historiques du paiement comme Visa, Mastercard ou Stripe dans ces nouveaux protocoles.</li>
+    <li><strong>Émergence de standards concurrents ou complémentaires</strong>, comme le protocole AP2 porté par Google, ce qui suggère que plusieurs approches du paiement entre agents IA pourraient coexister plutôt qu'un standard unique s'imposer immédiatement à l'ensemble du marché.</li>
+    <li><strong>Attention croissante portée à la protection des petits éditeurs</strong>, qui n'ont pas la capacité de négocier des accords de licence directs avec les grandes entreprises d'IA, contrairement aux plus grands groupes de presse ou plateformes de contenu.</li>
+  </ul>
+
+  <p><em>Ce guide sera mis à jour à mesure que ces standards de paiement entre IA se stabilisent — un domaine qui évolue encore rapidement à l'heure où ces lignes sont écrites. Les lecteurs souhaitant approfondir un point précis (fiscalité locale, choix technique d'implémentation, comparaison de wallets) sont invités à consulter les sources officielles listées ci-dessous, celles-ci étant amenées à évoluer plus rapidement que le contenu de synthèse proposé ici.</em></p>
+
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="https://www.circle.com" rel="noopener" target="_blank">Circle — documentation sur l'USDC</a></li>
+  </ul>
+  <p class="meta-line">Dernière mise à jour de ce guide : à vérifier régulièrement auprès des sources officielles listées ci-dessus avant toute décision importante engageant des fonds réels, ce domaine évoluant plus vite que la plupart des contenus de référence classiques disponibles en ligne.</p>
+
+</PillarLayout>

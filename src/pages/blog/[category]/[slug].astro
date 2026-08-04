@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import data from '../../../data/categories.json';
+
+export function getStaticPaths() {
+  return data.pages.map((p) => {
+    const category = data.categories.find((c) => c.slug === p.category);
+    const related = data.pages.filter((r) => p.related.includes(r.slug));
+    return {
+      params: { category: p.category, slug: p.slug },
+      props: { page: p, category, related },
+    };
+  });
+}
+
+const { page, category, related } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: page.question,
+      acceptedAnswer: { '@type': 'Answer', text: page.directAnswer },
+    },
+    ...page.variants.map((v) => ({
+      '@type': 'Question',
+      name: v.q,
+      acceptedAnswer: { '@type': 'Answer', text: v.a },
+    })),
+  ],
+};
+
+const today = new Date().toISOString().split('T')[0];
+---
+
+<BaseLayout
+  title={`${page.question} — Base de connaissances`}
+  description={page.directAnswer}
+  jsonLd={jsonLd}
+>
+  <span class="eyebrow">{category.name}</span>
+  <h1>{page.question}</h1>
+  <p class="meta-line">Mis à jour le {today}</p>
+
+  <p class="direct-answer">{page.directAnswer}</p>
+
+  {page.image && (
+    <figure class="content-figure">
+      <img src={page.image.src} alt={page.image.alt} loading="lazy" width="720" height="480" />
+      {page.image.credit && <figcaption>{page.image.credit}</figcaption>}
+    </figure>
+  )}
+
+  <h2>Contexte</h2>
+  <p>{page.context}</p>
+
+  {page.dataPoints?.length > 0 && (
+    <>
+      <h2>Données clés</h2>
+      <ul class="data-points">
+        {page.dataPoints.map((d) => <li>{d}</li>)}
+      </ul>
+    </>
+  )}
+
+  {page.variants?.length > 0 && (
+    <>
+      <h2>Questions associées</h2>
+      {page.variants.map((v) => (
+        <div class="variant">
+          <p class="q">{v.q}</p>
+          <p class="a">{v.a}</p>
+        </div>
+      ))}
+    </>
+  )}
+
+  {page.sources?.length > 0 && (
+    <>
+      <h2>Sources</h2>
+      <ul class="sources">
+        {page.sources.map((s) => (
+          <li><a href={s.url} rel="noopener" target="_blank">{s.label}</a></li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {related?.length > 0 && (
+    <>
+      <h2>À lire aussi</h2>
+      <div class="related-links">
+        {related.map((r) => (
+          <a href={`/blog/${r.category}/${r.slug}/`}>{r.question}</a>
+        ))}
+      </div>
+    </>
+  )}
+</BaseLayout>

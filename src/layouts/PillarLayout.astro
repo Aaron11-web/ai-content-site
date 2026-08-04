@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow: string;
+  toc: { id: string; label: string }[];
+  jsonLd?: object;
+}
+
+const { title, description, eyebrow, toc, jsonLd } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={Astro.url.href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="article" />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap">
+        <a href="/" class="logo">Base de connaissances</a>
+        <nav>
+          <a href="/blog/tech-ia/">Tech / IA</a>
+          <a href="/blog/finance-crypto/">Finance</a>
+          <a href="/blog/droit-demarches/">Droit</a>
+          <a href="/blog/science-culture/">Science</a>
+          <a href="/blog/pratique-lifestyle/">Pratique</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="wrap pillar-wrap">
+        <span class="eyebrow">{eyebrow}</span>
+        <h1>{title}</h1>
+        <p class="direct-answer">{description}</p>
+
+        <nav class="toc" aria-label="Sommaire">
+          <p class="toc-title">Sommaire</p>
+          <ol>
+            {toc.map((item) => <li><a href={`#${item.id}`}>{item.label}</a></li>)}
+          </ol>
+        </nav>
+
+        <article class="pillar-body">
+          <slot />
+        </article>
+      </div>
+    </main>
+    <footer class="site">
+      <div class="wrap">Contenu vérifié et sourcé. Mis à jour régulièrement.</div>
+    </footer>
+  </body>
+</html>
